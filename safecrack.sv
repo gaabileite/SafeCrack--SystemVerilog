@@ -149,6 +149,8 @@ module safecrack (
       next_register3 = register3;
 
       case (state)
+			// if register > 9: returns to 0
+			// if register < 0: jumps to 9
          A_INC: begin
             if      (register3 < 4'b1001)  next_register3 = register3 + 1'b1;
             else if (register3 == 4'b1001) next_register3 = 4'b0000;
@@ -179,8 +181,8 @@ module safecrack (
    end
 
    // update logic
-   always_ff @(posedge clk or negedge rst) begin
-      if (!rst) begin
+   always_ff @(posedge clk or posedge rst) begin
+      if (rst) begin
          state     <= A;
          delay_cnt <= 0;
          position  <= 2'b0;
