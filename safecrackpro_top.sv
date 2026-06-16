@@ -19,7 +19,7 @@ module safecrackpro_top (
 	 logic [3:0] register3;
     logic [1:0] position;
 
-    safecrack						(
+    safecrack u_safecrack		(
         .clk                  (clk),
         .rst                  (rst),
         .btn_inc             	(btn_inc),
